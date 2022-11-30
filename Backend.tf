@@ -2,10 +2,10 @@ terraform {
   backend "s3" {
     region         = "us-east-1"
     bucket         = "firstprojectbucketvbn"
-    #dynamodb_table = "FirstProject-tfstate-backend-lock"
-    #profile        = ""
-    #role_arn       = ""
+    dynamodb_table = "firstprojectdynamodbvbn"
+    profile        = ""
+    role_arn       = ""
     encrypt        = "true"
-    key            = "FirstProject.tfsate"
+    key            = "FirstProjetc/FirstProject.tfsate"
   }
 }

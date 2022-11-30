@@ -8,12 +8,7 @@ output "instance_public_dns" {
   description = "The public DNS name of the main server instance."
 }
 
-output "private_key_pem" {
+output "private_key" {
   value     = tls_private_key.pk.private_key_pem
-  sensitive = true
-}
-
-output "private_key_openssh" {
-  value     = tls_private_key.pk.private_key_openssh
   sensitive = true
 }

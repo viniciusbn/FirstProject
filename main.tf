@@ -35,7 +35,7 @@ resource "aws_instance" "FirstProject" {
   key_name                    = aws_key_pair.FirstProject_KP.key_name
   security_groups             = [aws_security_group.FirstProject_SG.name]
   associate_public_ip_address = true
-  user_data                   = file("install_and_run_docker.sh")
+  user_data                   = file("DeployApp.sh")
   tags = {
     Name = "FirstProject"
   }

@@ -1,10 +1,6 @@
+#!/bin/bash
 #Update the apt package index and install packages to allow apt to use a repository over HTTPS:
-sudo apt-get update -y
-sudo apt-get install -y \
-    ca-certificates \
-    curl \
-    gnupg \
-    lsb-release
+sudo apt-get update -y && sudo apt-get install -y ca-certificates curl gnupg lsb-release
 
 #Add Docker’s official GPG key:
 

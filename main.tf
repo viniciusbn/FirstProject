@@ -35,9 +35,11 @@ resource "aws_instance" "FirstProject" {
   key_name                    = aws_key_pair.FirstProject_KP.key_name
   security_groups             = [aws_security_group.FirstProject_SG.name]
   associate_public_ip_address = true
-  user_data                   = <<EOF
+  user_data                   = <<-EOF
 #!/bin/bash
-sudo apt update && sudo apt install docker.io -y && sudo docker run -d -p 3000:3000 vbnascimento/firstproject
+set -ex
+sudo apt update && sudo apt install docker.io -y
+sudo docker run -d -p 3000:3000 vbnascimento/firstproject
 EOF
   tags = {
     Name = "FirstProject"

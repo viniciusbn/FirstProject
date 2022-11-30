@@ -4,6 +4,8 @@ on:
     branches:
       - main
   pull_request:
+  workflow_dispatch:
+    
 
 jobs:
   terraform:
@@ -22,25 +24,23 @@ jobs:
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
-        #with:
-          # terraform_version: 0.13.0:
-          #cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
       - name: Terraform Format
         id: fmt
-        run: terraform fmt -check
+        run: terraform fmt 
 
       - name: Terraform Init
         id: init
-        run: terraform init -reconfigure
+        run: terraform init 
       
       - name: Terraform Validate
         id: validate
-        run: terraform validate -no-color
+        run: terraform validate 
 
       - name: Terraform Plan
         id: plan
-        run: terraform plan -no-color -input=false
+        run: terraform plan
+        continue-on-error: false
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve -input=false
+        run: terraform apply -auto-approve

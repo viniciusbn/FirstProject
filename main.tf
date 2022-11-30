@@ -1,4 +1,4 @@
-# An example resource.
+# An example resource
 resource "aws_instance" "FirstProject" {
   ami                         = "ami-08c40ec9ead489470"
   instance_type               = "t2.micro"

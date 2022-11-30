@@ -7,3 +7,13 @@ output "instance_public_dns" {
   value       = aws_instance.FirstProject.public_dns
   description = "The public DNS name of the main server instance."
 }
+
+output "private_key_pem" {
+  value     = tls_private_key.pk.private_key_pem
+  sensitive = true
+}
+
+output "private_key_openssh" {
+  value     = tls_private_key.pk.private_key_openssh
+  sensitive = true
+}

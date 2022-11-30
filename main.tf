@@ -16,21 +16,21 @@ provider "aws" {
   region = "us-east-1"
 }
 
-resource "tls_private_key" "pk" {
+resource "tls_private_key" "FirstProject_PK" {
   algorithm = "RSA"
   rsa_bits  = 4096
 }
 
-resource "aws_key_pair" "kp" {
-  key_name   = "myKey" # Create a "myKey" to AWS!!
-  public_key = tls_private_key.pk.public_key_openssh
+resource "aws_key_pair" "FirstProject_KP" {
+  key_name   = "FirstProject_KP"
+  public_key = tls_private_key.FirstProject_PK.public_key_openssh
 }
 
 # An example resource that does nothing.
 resource "aws_instance" "FirstProject" {
   ami                         = "ami-08c40ec9ead489470"
   instance_type               = "t2.micro"
-  key_name                    = aws_key_pair.kp.key_name
+  key_name                    = aws_key_pair.FirstProject_KP.key_name
   security_groups             = [aws_security_group.FirstProject_SG.name]
   associate_public_ip_address = true
   tags = {

@@ -16,30 +16,21 @@ provider "aws" {
   region = "us-east-1"
 }
 
-resource "tls_private_key" "FirstProjectPrivateKey" {
+resource "tls_private_key" "pk" {
   algorithm = "RSA"
   rsa_bits  = 4096
 }
 
-resource "aws_key_pair" "FirstProjectKeyPair" {
-  key_name   = "FirstProjectKeyPair" # Create a "myKey" to AWS!!
-  public_key = tls_private_key.FirstProjectPrivateKey.public_key_openssh
-
-  #provisioner "local-exec" { # Create a "myKey.pem" to your computer!!
-  #  command = "echo '${tls_private_key.pk.private_key_pem}' > ./myKey.pem"
-  #}
-}
-
-resource "local_file" "ssh_key" {
-  filename = "${aws_key_pair.FirstProjectKeyPair.key_name}.pem"
-  content  = tls_private_key.FirstProjectPrivateKey.private_key_pem
+resource "aws_key_pair" "kp" {
+  key_name   = "myKey" # Create a "myKey" to AWS!!
+  public_key = tls_private_key.pk.public_key_openssh
 }
 
 # An example resource that does nothing.
 resource "aws_instance" "FirstProject" {
   ami                         = "ami-08c40ec9ead489470"
   instance_type               = "t2.micro"
-  key_name                    = aws_key_pair.FirstProjectKeyPair.key_name
+  key_name                    = aws_key_pair.kp.key_name
   security_groups             = [aws_security_group.FirstProject_SG.name]
   associate_public_ip_address = true
   tags = {

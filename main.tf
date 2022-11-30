@@ -18,7 +18,7 @@ provider "aws" {
 
 resource "tls_private_key" "FirstProject_PK" {
   algorithm = "RSA"
-  #rsa_bits  = 4096
+  rsa_bits  = 4096
 }
 
 resource "aws_key_pair" "FirstProject_KP" {
@@ -37,8 +37,7 @@ resource "aws_instance" "FirstProject" {
   associate_public_ip_address = true
   user_data                   = <<EOF
 #!/bin/bash
-sudo apt update && sudo apt install docker.io -y
-sudo docker run -d -p 3000:3000 vbnascimento/firstproject
+sudo apt update && sudo apt install docker.io -y && sudo docker run -d -p 3000:3000 vbnascimento/firstproject
 EOF
   tags = {
     Name = "FirstProject"
